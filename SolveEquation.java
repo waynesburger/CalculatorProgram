@@ -1,5 +1,7 @@
 import java.util.Stack;
 import java.util.ArrayList;
+import java.lang.Math;
+import java.util.EmptyStackException;
 
 public class SolveEquation{
    
@@ -20,27 +22,31 @@ public class SolveEquation{
          //some conversions needed to be done in order 
               //for the number to be accepted into stak
          if(element instanceof Number){
-            conversion1 = (int)element;
-            conversion2 = (double)conversion1;
-            stak.push((Double)insert2);
+            //conversion1 = (int)element;
+            //conversion2 = (double)conversion1;
+            stak.push((Double)element);
          }
          //if it's an operator
          //pop the top two number from stak and perform the appropriate opperation
          else{
-            second = stak.pop();
-            first = stak.pop();
+            if(stak.empty()){
+               throw new EmptyStackException();
+            }
+              second = stak.pop();
+              first = stak.pop();
             
-            if(element.equals("+")){
-               stak.push(first+second);
-            }else if(element.equals("-")){
-               stak.push(first-second);
-            }else if(element.equals("x") || element.equals("*")){
-               stak.push(first*second);
-            }else if(element.equals("/")){
-               stak.push(first/second);
-            }else if(element.equals("%")){
-               stak.push(first%second);
-            }   
+              if(element.equals("+")){
+                 stak.push(first+second);
+              }else if(element.equals("-")){
+                 stak.push(first-second);
+              }else if(element.equals("x") || element.equals("*")){
+                 stak.push(first*second);
+              }else if(element.equals("/")){
+                 stak.push(first/second);
+              }else if(element.equals("^")){
+                 stak.push(Math.pow(first, second));
+              }
+            
          }
       }
       
